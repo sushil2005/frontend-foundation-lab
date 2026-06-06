@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Clone</title>
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --sidebar: #fff;
+      --chat-bg: #e5ddd5;
+      --primary: #075e54;
+      --secondary: #128c7e;
+      --text: #111;
+      --muted: #54656f;
+      --border: #dcdcdc;
+      --input-bg: #f5f5f5;
+      --received: #fff;
+      --sent: #dcf8c6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 100vh;
+      border: 1px solid #ccc;
+      margin: 16px auto;
+      max-width: 1200px;
+      background: #fff;
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border);
+      background: var(--sidebar);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-header,
+    .chat-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      background: #f7f7f7;
+    }
+
+    .sidebar-header h2,
+    .chat-header h2 {
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .search-box {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #fafafa;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      outline: none;
+      background: var(--input-bg);
+    }
+
+    .contact-list {
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px 0;
+    }
+
+    .contact {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .contact:hover,
+    .contact.active {
+      background: #f0f8ff;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .contact-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .contact-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .contact-message {
+      font-size: 0.95rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    .chat-header {
+      background: #e9f7f3;
+    }
+
+    .chat-header .status {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 24px;
+      background-image: linear-gradient(transparent 0%, transparent calc(100% - 48px)), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 20 20%22%3E%3Cpath fill=%22%23d1e7dd%22 fill-opacity=%220.24%22 d=%22M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0Zm0 18.2A8.2 8.2 0 1 1 18.2 10 8.21 8.21 0 0 1 10 18.2Z%22/%3E%3C/svg%3E');
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 66%;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      position: relative;
+      word-wrap: break-word;
+      line-height: 1.45;
+    }
+
+    .message.received {
+      background: var(--received);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+    }
+
+    .message.sent {
+      background: var(--sent);
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
+    }
+
+    .message-time {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    .chat-input {
+      border-top: 1px solid var(--border);
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      background: #fff;
+    }
+
+    .chat-input textarea {
+      flex: 1;
+      height: 54px;
+      resize: none;
+      border: 1px solid #dcdcdc;
+      border-radius: 18px;
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 0.98rem;
+      line-height: 1.4;
+      outline: none;
+      background: var(--input-bg);
+    }
+
+    .chat-input button {
+      width: 110px;
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .chat-input button:hover {
+      transform: translateY(-1px);
+      background: #0f7d68;
+    }
+
+    .no-selection {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      color: var(--muted);
+      text-align: center;
+      padding: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+
+      .chat {
+        order: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="sidebar">
+      <div class="sidebar-header">
+        <div>
+          <h2>WhatsApp Clone</h2>
+          <p class="status">Chats, status, and calls</p>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input id="search" type="search" placeholder="Search or start new chat" />
+      </div>
+
+      <div id="contactList" class="contact-list"></div>
+    </section>
+
+    <section class="chat">
+      <div class="chat-header" id="chatHeader">
+        <div>
+          <h2 id="chatName">Select a chat</h2>
+          <p class="status" id="chatStatus">Choose a contact to start messaging.</p>
+        </div>
+      </div>
+
+      <div class="messages" id="messagesArea">
+        <div class="no-selection">
+          <div>
+            <p><strong>Welcome to WhatsApp Clone</strong></p>
+            <p>Select a contact and send a message to see the chat interface.</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="messageForm" class="chat-input" autocomplete="off">
+        <textarea id="messageInput" placeholder="Type a message" rows="1"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    const contacts = [
+      {
+        id: 1,
+        name: 'Aisha',
+        lastMessage: 'See you soon! 😊',
+        status: 'online',
+        convo: [
+          { from: 'them', text: 'Hello! Are you free now?', time: '09:04' },
+          { from: 'me', text: 'Yes, I am. Want to plan the trip?', time: '09:07' },
+          { from: 'them', text: 'Yes, that sounds great!', time: '09:08' },
+        ],
+      },
+      {
+        id: 2,
+        name: 'Bilal',
+        lastMessage: 'I will send it today.',
+        status: 'offline',
+        convo: [
+          { from: 'them', text: 'Did you finish the assignment?', time: '11:12' },
+          { from: 'me', text: 'Almost done, sending soon.', time: '11:14' },
+          { from: 'them', text: 'Perfect, thank you!', time: '11:15' },
+        ],
+      },
+      {
+        id: 3,
+        name: 'Zara',
+        lastMessage: 'Let’s meet later.',
+        status: 'online',
+        convo: [
+          { from: 'them', text: 'The event starts at 6PM.', time: '14:20' },
+          { from: 'me', text: 'I will be there by 5:30.', time: '14:22' },
+        ],
+      },
+      {
+        id: 4,
+        name: 'Sania',
+        lastMessage: 'Thanks for the update.',
+        status: 'offline',
+        convo: [
+          { from: 'them', text: 'Can you send the notes?', time: '08:05' },
+          { from: 'me', text: 'Sure, uploading them now.', time: '08:07' },
+        ],
+      },
+    ];
+
+    let activeContact = null;
+    const contactList = document.getElementById('contactList');
+    const messagesArea = document.getElementById('messagesArea');
+    const chatName = document.getElementById('chatName');
+    const chatStatus = document.getElementById('chatStatus');
+    const messageForm = document.getElementById('messageForm');
+    const messageInput = document.getElementById('messageInput');
+    const searchInput = document.getElementById('search');
+
+    function renderContacts(filter = '') {
+      contactList.innerHTML = '';
+      const normalizedFilter = filter.trim().toLowerCase();
+      contacts
+        .filter(contact => contact.name.toLowerCase().includes(normalizedFilter))
+        .forEach(contact => {
+          const contactEl = document.createElement('div');
+          contactEl.className = 'contact' + (activeContact?.id === contact.id ? ' active' : '');
+          contactEl.dataset.id = contact.id;
+
+          contactEl.innerHTML = `
+            <div class="avatar">${contact.name.charAt(0)}</div>
+            <div class="contact-details">
+              <div class="contact-name">${contact.name}</div>
+              <div class="contact-message">${contact.lastMessage}</div>
+            </div>
+          `;
+
+          contactEl.addEventListener('click', () => {
+            activeContact = contact;
+            renderContacts(searchInput.value);
+            renderChat();
+          });
+
+          contactList.appendChild(contactEl);
+        });
+
+      if (!contactList.children.length) {
+        contactList.innerHTML = '<div class="no-selection"><p>No contacts found.</p></div>';
+      }
+    }
+
+    function renderChat() {
+      messagesArea.innerHTML = '';
+      if (!activeContact) {
+        messagesArea.innerHTML = `
+          <div class="no-selection">
+            <div>
+              <p><strong>Welcome to WhatsApp Clone</strong></p>
+              <p>Select a contact and send a message to start chatting.</p>
+            </div>
+          </div>
+        `;
+        chatName.textContent = 'Select a chat';
+        chatStatus.textContent = 'Choose a contact to start messaging.';
+        return;
+      }
+
+      chatName.textContent = activeContact.name;
+      chatStatus.textContent = activeContact.status === 'online' ? 'online' : 'last seen today';
+
+      activeContact.convo.forEach(message => {
+        const messageEl = document.createElement('div');
+        messageEl.className = `message ${message.from}`;
+        messageEl.innerHTML = `
+          <div>${message.text}</div>
+          <div class="message-time">${message.time}</div>
+        `;
+        messagesArea.appendChild(messageEl);
+      });
+
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function addMessage(text) {
+      if (!activeContact || !text.trim()) return;
+
+      const time = new Date();
+      const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      activeContact.convo.push({ from: 'me', text: text.trim(), time: formattedTime });
+      activeContact.lastMessage = text.trim();
+      renderContacts(searchInput.value);
+      renderChat();
+    }
+
+    messageForm.addEventListener('submit', event => {
+      event.preventDefault();
+      addMessage(messageInput.value);
+      messageInput.value = '';
+      messageInput.focus();
+    });
+
+    searchInput.addEventListener('input', () => {
+      renderContacts(searchInput.value);
+    });
+
+    renderContacts();
+    renderChat();
+  </script>
+</body>
+</html>
