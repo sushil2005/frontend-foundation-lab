@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5aa0 100%);
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            padding: 0 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #64b5f6;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #64b5f6;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="search"] {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            width: 200px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="search"]::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input[type="search"]:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+        }
+
+        /* Dropdown Menu */
+        .main {
+            display: inline-block;
+            position: relative;
+        }
+
+        .menu {
+            background: linear-gradient(180deg, #2c5aa0 0%, #1e3a5f 100%);
+            list-style: none;
+            position: absolute;
+            padding: 0;
+            margin: 0;
+            top: 100%;
+            left: 0;
+            min-width: 150px;
+            display: none;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu li {
+            width: 100%;
+            text-align: center;
+            padding: 12px 15px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu li:last-child {
+            border-bottom: none;
+        }
+
+        .menu li:hover {
+            background-color: #64b5f6;
+            color: #1e3a5f;
+            font-weight: 600;
+        }
+
+        .main:hover .menu {
+            display: block;
+        }
+
+        /* Header */
+        header {
+            height: 70px;
+        }
+
+        /* Page Content */
+        .container {
+            margin-top: 70px;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .content-section h2 {
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+
+        .content-section p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <nav>
+        <a href="#" class="logo">NavBar</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#help">Help</a></li>
+            <li>
+                <div class="main">
+                    <a href="#contact">Contact</a>
+                    <ul class="menu">
+                        <li>Email Support</li>
+                        <li>Phone Support</li>
+                        <li>Live Chat</li>
+                        <li>Feedback</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="search-box">
+            <input type="search" placeholder="Search...">
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="content-section">
+            <h2>Welcome to Our Professional Portal</h2>
+            <p>Experience seamless navigation with our modern and elegant navbar. Designed with user experience in mind, featuring smooth animations, professional colors, and intuitive controls.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Features</h2>
+            <p>• Fixed navigation bar that stays at the top while scrolling<br>
+            • Smooth hover animations and transitions<br>
+            • Responsive dropdown menu under Contact<br>
+            • Integrated search functionality<br>
+            • Professional color scheme and typography<br>
+            • Clean and modern design</p>
+        </div>
+    </div>
+</body>
+</html>
