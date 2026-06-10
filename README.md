@@ -1,43 +1,68 @@
-# HTML Learning Journey
+# Frontend Foundation Lab 🚀
 
-Welcome to my HTML learning repository 🚀
-
-This repository contains my daily HTML practice, exercises, and mini projects while learning Web Technology from basic to advanced level.
-
-## 📚 Topics Covered
-- HTML Basics
-- Headings & Paragraphs
-- Text Formatting
-- Lists
-- Tables
-- Forms
-- Images & Links
-- Semantic HTML
-- Multimedia
-- HTML5 Elements
-
-## 🎯 Goal
-To build a strong foundation in frontend and full-stack web development.
-
-## 🛠 Technologies Used
-- HTML5
-- VS Code
-- Git & GitHub
-
-## 📌 Repository Purpose
-This repository is created to:
-- Track my daily learning progress
-- Practice HTML concepts
-- Build consistency in coding
-- Improve my GitHub profile
-
-## 🚀 Future Plan
-After HTML, I will continue learning:
-- CSS
-- JavaScript
-- Bootstrap
-- Database
-- Full Stack Development
+## 📌 About
+This repository documents my structured learning journey in Frontend Development.  
+It focuses on building strong fundamentals in **HTML and CSS**, along with practical UI layouts and mini projects.
 
 ---
-⭐ Consistent learning every day.
+
+## 🎯 Purpose
+- Strengthen core frontend skills
+- Practice real-world UI layouts
+- Build consistency in coding
+- Prepare for internships and projects
+
+---
+
+## 🧠 What I Learned
+- HTML structure and semantic tags
+- CSS styling fundamentals
+- Flexbox layout system
+- UI component design basics
+- Page structuring techniques
+
+---
+
+## 📁 Repository Structure
+frontend-foundation-lab/
+│
+├── html/           → Basic HTML practice files  
+├── css/            → CSS styling examples  
+├── flexbox/        → Flexbox layout practice  
+├── projects/       → Mini UI projects (Navbar, Cards, etc.)
+
+---
+
+## 🛠️ Tech Stack
+- HTML5
+- CSS3
+- Flexbox
+
+---
+
+## 💡 Mini Projects Included
+- Responsive Navbar
+- Profile Card UI
+- Centered Layout Designs
+- Simple Page Layouts
+
+---
+
+## 📈 Progress
+This is an ongoing learning repository.  
+I regularly update it with new concepts and practice work.
+
+---
+
+## 🚀 Goal
+To become confident in frontend development and build real-world UI projects.
+
+---
+
+## 📬 Contact
+If you like my work or want to collaborate:
+- GitHub: [sushil2005]
+
+---
+
+⭐ If you find this helpful, feel free to star the repo!
