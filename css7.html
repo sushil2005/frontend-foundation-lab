@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text Properties Example</title>
+
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    background-color:#f0f0f0;
+    padding:30px;
+}
+
+.text-example{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:20px;
+    font-weight:bold;
+    font-style:italic;
+    font-variant:small-caps;
+    line-height:1.8;
+    letter-spacing:2px;
+    word-spacing:10px;
+
+    text-align:center;
+    text-decoration:underline overline wavy red;
+    text-transform:uppercase;
+
+    text-indent:50px;
+    text-shadow:2px 2px 4px gray;
+
+    direction:ltr;
+    white-space:nowrap;
+    overflow:hidden;
+    width:90%;
+}
+
+.rtl-example{
+    direction:rtl;
+    unicode-bidi:bidi-override;
+}
+
+.wrap-example{
+    white-space:normal;
+    word-break:break-all;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="text-example">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Id debitis, recusandae veniam natus repudiandae sapiente
+    dolorem unde provident quo.
+</div>
+
+<br><br>
+
+<div class="rtl-example">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Odio sed eos, molestias magnam molestiae! Placeat aliquid
+    modi sed autem, rerum possimus.
+</div>
+
+<br><br>
+
+<div class="wrap-example">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Modi beatae quae asperiores perspiciatis aliquid odio
+    blanditiis sit explicabo aliquam.
+</div>
+
+</body>
+</html>
